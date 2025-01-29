@@ -11,7 +11,7 @@
 	<groupId>com.greenmart</groupId>
 	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GreenMart</name>
+	<name>GreenMart-Backend</name>
 	<description>CDAC final project</description>
 	<url/>
 	<licenses>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>test</scope>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
