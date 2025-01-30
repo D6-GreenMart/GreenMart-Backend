@@ -1,4 +1,4 @@
-package com.greenmart.app.entities;
+package com.greenmart.app.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -48,17 +48,17 @@ public class Product {
 	private Long quantity;
 	
 	@Column(nullable = false)
-	private String imageUrl;
+	private String imagePath;
 	
 	@Column(nullable = false)
-	private LocalDateTime createAt;
+	private LocalDateTime createdAt;
 	
 	@Column(nullable = false)
 	private LocalDateTime restockedAt;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(createAt, description, id, imageUrl, name, price, quantity, restockedAt);
+		return Objects.hash(createdAt, description, id, imagePath, name, price, quantity, restockedAt);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(createAt, other.createAt) && Objects.equals(description, other.description)
-				&& Objects.equals(id, other.id) && Objects.equals(imageUrl, other.imageUrl)
+		return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description)
+				&& Objects.equals(id, other.id) && Objects.equals(imagePath, other.imagePath)
 				&& Objects.equals(name, other.name)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
 				&& Objects.equals(quantity, other.quantity) && Objects.equals(restockedAt, other.restockedAt);
@@ -79,7 +79,7 @@ public class Product {
 	
 	@PrePersist
 	protected void onCreate() {
-		this.createAt = LocalDateTime.now();
+		this.createdAt = LocalDateTime.now();
 		this.restockedAt = LocalDateTime.now();
 	}
 	

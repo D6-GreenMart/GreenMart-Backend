@@ -1,5 +1,6 @@
-package com.greenmart.app.entities;
+package com.greenmart.app.domain.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -8,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,24 +18,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="tags")
+@Table(name = "reviews")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Tag {
+public class Review {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
-	@Column(nullable=false, unique = true)
-	private String name;
+	//user
+	//product
+	
+	@Column(nullable = false)
+	private int rating;
+	
+	@Column(columnDefinition = "TEXT")
+	private String comment;
+	
+	@Column(nullable = false)
+	private LocalDateTime createdAt;
+	
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(comment, createdAt, id, rating);
 	}
 
 	@Override
@@ -44,9 +60,9 @@ public class Tag {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tag other = (Tag) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		Review other = (Review) obj;
+		return Objects.equals(comment, other.comment) && Objects.equals(createdAt, other.createdAt)
+				&& Objects.equals(id, other.id) && rating == other.rating;
 	}
-	
 	
 }

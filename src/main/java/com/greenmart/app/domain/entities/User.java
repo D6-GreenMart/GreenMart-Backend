@@ -1,4 +1,4 @@
-package com.greenmart.app.entities;
+package com.greenmart.app.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -48,9 +48,16 @@ public class User {
 	@Column(nullable = false)
 	private LocalDateTime createdAt;
 
+	private String imagePath;
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, createdAt, email, id, name, password, phoneNumber);
+		return Objects.hash(address, createdAt, email, id, imagePath, name, password, phoneNumber);
 	}
 
 	@Override
@@ -64,15 +71,8 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(address, other.address) && Objects.equals(createdAt, other.createdAt)
 				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
-				&& Objects.equals(phoneNumber, other.phoneNumber);
+				&& Objects.equals(imagePath, other.imagePath) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(phoneNumber, other.phoneNumber);
 	}
-	
-	
-	@PrePersist
-	protected void onCreate() {
-		this.createdAt = LocalDateTime.now();
-	}
-	
-	
+
 }

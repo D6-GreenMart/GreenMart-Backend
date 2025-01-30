@@ -1,4 +1,4 @@
-package com.greenmart.app.entities;
+package com.greenmart.app.domain.entities;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -16,26 +16,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="categories")
+@Table(name = "order_items")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Category {
+public class OrderItem {
+//OrderItemID, OrderID, ProductID, Quantity, Price
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
-	@Column(nullable = false, unique=true)
-	private String name;
 	
-	private String description;
+	//order
+	
+	
+	//product
+	
+	@Column(nullable = false)
+	private int quantity;
+	
+	@Column(nullable = false)
+	private double price;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id, name);
+		return Objects.hash(id, price, quantity);
 	}
 
 	@Override
@@ -46,9 +54,9 @@ public class Category {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
-		return Objects.equals(description, other.description) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name);
+		OrderItem other = (OrderItem) obj;
+		return Objects.equals(id, other.id) && Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+				&& quantity == other.quantity;
 	}
 	
 	
