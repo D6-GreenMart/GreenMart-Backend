@@ -72,8 +72,8 @@ public class Product {
 	)
 	private Set<Tag> tags = new HashSet<>();
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderItem> orderItems = new HashSet<>();
+//	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<OrderItem> orderItems = new HashSet<>();
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();

@@ -1,1 +1,12 @@
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Cart.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\CartItem.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Category.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Order.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\OrderItem.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Product.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Review.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Tag.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\User.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Vendor.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\OrderStatus.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\GreenMartBackendApplication.java
