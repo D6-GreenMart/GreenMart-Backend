@@ -1,14 +1,20 @@
 package com.greenmart.app.domain.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -32,13 +38,18 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
-	//user
+	@OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 	
 	@Column(nullable = false)
 	private LocalDateTime createdAt;
 	
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;
+	
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CartItem> cartItems = new ArrayList<>();
 	
 	@PrePersist
 	protected void onCreate() {
