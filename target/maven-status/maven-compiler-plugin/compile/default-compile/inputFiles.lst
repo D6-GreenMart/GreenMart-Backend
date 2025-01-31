@@ -1,5 +1,8 @@
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\CategoryController.java
+S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\ErrorController.java
+S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\ApiErrorResponse.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\CategoryDto.java
+S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\CreateCategoryRequest.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Cart.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\CartItem.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Category.java

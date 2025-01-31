@@ -1,11 +1,14 @@
+com\greenmart\app\domain\dtos\ApiErrorResponse.class
 com\greenmart\app\domain\entities\OrderItem.class
 com\greenmart\app\domain\entities\Tag.class
 com\greenmart\app\repositories\VendorRespository.class
 com\greenmart\app\controllers\CategoryController.class
 com\greenmart\app\domain\entities\Category$CategoryBuilder.class
 com\greenmart\app\domain\entities\Order.class
+com\greenmart\app\domain\dtos\CreateCategoryRequest.class
 com\greenmart\app\domain\entities\User$UserBuilder.class
 com\greenmart\app\domain\dtos\CategoryDto$CategoryDtoBuilder.class
+com\greenmart\app\domain\dtos\ApiErrorResponse$ApiErrorResponseBuilder.class
 com\greenmart\app\domain\entities\Cart.class
 com\greenmart\app\domain\entities\Cart$CartBuilder.class
 com\greenmart\app\domain\entities\CartItem$CartItemBuilder.class
@@ -15,6 +18,7 @@ com\greenmart\app\repositories\OrderItemRepository.class
 com\greenmart\app\repositories\ReviewRepository.class
 com\greenmart\app\domain\entities\Review$ReviewBuilder.class
 com\greenmart\app\GreenMartBackendApplication.class
+com\greenmart\app\domain\dtos\ApiErrorResponse$FieldError.class
 com\greenmart\app\domain\entities\CartItem.class
 com\greenmart\app\domain\entities\Product.class
 com\greenmart\app\domain\entities\User.class
@@ -35,5 +39,7 @@ com\greenmart\app\domain\OrderStatus.class
 com\greenmart\app\mappers\CategoryMapper.class
 com\greenmart\app\mappers\CategoryMapperImpl.class
 com\greenmart\app\repositories\UserRepository.class
+com\greenmart\app\controllers\ErrorController.class
 com\greenmart\app\services\impl\CategoryServiceImpl.class
+com\greenmart\app\domain\dtos\CreateCategoryRequest$CreateCategoryRequestBuilder.class
 com\greenmart\app\domain\entities\Vendor$VendorBuilder.class

@@ -8,6 +8,7 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import com.greenmart.app.domain.dtos.CategoryDto;
+import com.greenmart.app.domain.dtos.CreateCategoryRequest;
 import com.greenmart.app.domain.entities.Category;
 import com.greenmart.app.domain.entities.Product;
 
@@ -16,6 +17,8 @@ public interface CategoryMapper {
 
 	@Mapping(target = "productCount", source = "products", qualifiedByName = "calculateProductCount")
 	CategoryDto toDto(Category category);
+	
+	Category toEntity(CreateCategoryRequest createCategoryRequest);
 	
 	@Named("calculateProductCount")
 	default long calculateProductCount(List<Product> products) {
