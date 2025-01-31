@@ -41,7 +41,7 @@ public class Category {
 
 	@OneToMany(mappedBy = "category")
 	private List<Product> products = new ArrayList<>();
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, imagePath, name);
