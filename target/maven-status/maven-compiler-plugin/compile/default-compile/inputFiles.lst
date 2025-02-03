@@ -2,11 +2,14 @@ D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\config\SecurityCo
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\AuthController.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\CategoryController.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\ErrorController.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\controllers\TagController.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\ApiErrorResponse.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\AuthResponse.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\CategoryDto.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\CreateCategoryRequest.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\CreateTagsRequest.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\LoginRequest.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\TagResponse.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Cart.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\CartItem.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Category.java
@@ -18,8 +21,10 @@ D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\T
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\User.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Vendor.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\OrderStatus.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\ProductStatus.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\GreenMartBackendApplication.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\CategoryMapper.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\TagMapper.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CartItemRepository.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CartRepository.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CategoryRepository.java
@@ -37,3 +42,5 @@ D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\Authenti
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\CategoryService.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\impl\AuthenticationServiceImpl.java
 D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\impl\CategoryServiceImpl.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\impl\TagServiceImpl.java
+D:\GreenMart\GreenMart-Backend\src\main\java\com\greenmart\app\services\TagService.java

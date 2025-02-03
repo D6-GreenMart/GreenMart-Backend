@@ -54,5 +54,9 @@ public class Tag {
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 	
+	public Tag(String name) {
+	    this.name = name;
+	    this.products = new HashSet<>();
+	}
 	
 }
