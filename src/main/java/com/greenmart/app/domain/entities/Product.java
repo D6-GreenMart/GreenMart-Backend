@@ -6,9 +6,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import com.greenmart.app.domain.ProductStatus;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -63,6 +67,10 @@ public class Product {
 
 	@Column(nullable = false)
 	private String imagePath;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private ProductStatus status;
 
 	@ManyToMany
 	@JoinTable(
@@ -87,9 +95,24 @@ public class Product {
 	@Column(nullable = false)
 	private LocalDateTime restockedAt;
 
+	
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+		this.restockedAt = LocalDateTime.now();
+		this.status = ProductStatus.PENDING;
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.restockedAt = LocalDateTime.now();
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, description, id, imagePath, name, price, quantity, restockedAt);
+		return Objects.hash(category, createdAt, description, id, imagePath, name, price, quantity, restockedAt, status,
+				vendor);
 	}
 
 	@Override
@@ -101,21 +124,11 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description)
-				&& Objects.equals(id, other.id) && Objects.equals(imagePath, other.imagePath)
-				&& Objects.equals(name, other.name)
+		return Objects.equals(category, other.category) && Objects.equals(createdAt, other.createdAt)
+				&& Objects.equals(description, other.description) && Objects.equals(id, other.id)
+				&& Objects.equals(imagePath, other.imagePath) && Objects.equals(name, other.name)
 				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
-				&& Objects.equals(quantity, other.quantity) && Objects.equals(restockedAt, other.restockedAt);
-	}
-
-	@PrePersist
-	protected void onCreate() {
-		this.createdAt = LocalDateTime.now();
-		this.restockedAt = LocalDateTime.now();
-	}
-
-	@PreUpdate
-	protected void onUpdate() {
-		this.restockedAt = LocalDateTime.now();
+				&& Objects.equals(quantity, other.quantity) && Objects.equals(restockedAt, other.restockedAt)
+				&& status == other.status && Objects.equals(vendor, other.vendor);
 	}
 }
