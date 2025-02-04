@@ -36,7 +36,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Order {
-	//OrderID, UserID, OrderDate, TotalAmount, OrderStatus, ShippingAddress
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)

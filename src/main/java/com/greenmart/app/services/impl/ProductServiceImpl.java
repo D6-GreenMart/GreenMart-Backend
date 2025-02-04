@@ -80,15 +80,22 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getProductsByCategory(UUID categoryId) {
 	    Category category = categoryRepository.findById(categoryId)
 	            .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-	    return productRepository.findAllByCategory(category);
+	    return productRepository.findByCategoryAndStatus(category, ProductStatus.APPROVED);
 	}
 	
 	@Override
 	public List<Product> getProductsByVendor(UUID vendorId) {
 	    User vendor = userRepository.findById(vendorId)
 	            .orElseThrow(() -> new EntityNotFoundException("Vendor not found"));
-	    return productRepository.findAllByVendor(vendor);
+	    return productRepository.findByVendorAndStatus(vendor, ProductStatus.APPROVED);
 	}
+	
+	@Override
+	public List<Product> getPendingProducts() {
+	    return productRepository.findAllByStatus(ProductStatus.PENDING);
+	}
+
+
     
     
 

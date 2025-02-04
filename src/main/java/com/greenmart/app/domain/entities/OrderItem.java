@@ -25,7 +25,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class OrderItem {
-//OrderItemID, OrderID, ProductID, Quantity, Price
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)

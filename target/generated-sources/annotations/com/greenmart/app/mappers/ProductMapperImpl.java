@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-04T08:59:50+0530",
+    date = "2025-02-04T10:17:30+0530",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.40.0.v20241112-0530, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
@@ -36,6 +36,7 @@ public class ProductMapperImpl implements ProductMapper {
         if ( product.getQuantity() != null ) {
             productDto.quantity( product.getQuantity().intValue() );
         }
+        productDto.status( product.getStatus() );
 
         return productDto.build();
     }

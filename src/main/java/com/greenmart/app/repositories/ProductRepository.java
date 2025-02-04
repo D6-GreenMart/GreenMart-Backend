@@ -32,4 +32,10 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> findAllByRestockedAtOrderByRestockedAtDesc(LocalDateTime restockedAt);
 
     List<Product> findAllByStatus(ProductStatus status);
+
+	List<Product> findByCategoryAndStatus(Category category, ProductStatus approved);
+
+	List<Product> findByVendorAndStatus(User vendor, ProductStatus approved);
+	
+	List<Product> findByStatus(ProductStatus status);
 }

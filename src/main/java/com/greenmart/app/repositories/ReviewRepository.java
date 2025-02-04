@@ -1,5 +1,6 @@
 package com.greenmart.app.repositories;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +10,5 @@ import com.greenmart.app.domain.entities.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
-
-	
-	
+    List<Review> findByProductId(UUID productId);
 }

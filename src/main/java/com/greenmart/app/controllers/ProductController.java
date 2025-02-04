@@ -96,6 +96,18 @@ public class ProductController {
 	    return ResponseEntity.ok(productDtos);
 	}
 	
+	@GetMapping("/pending")
+    public ResponseEntity<List<ProductDto>> getPendingProducts() {
+        List<Product> pendingProducts = productService.getPendingProducts();
+        
+        List<ProductDto> productDtos = pendingProducts.stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(productDtos);
+    }
+	
+	
 	
 
 

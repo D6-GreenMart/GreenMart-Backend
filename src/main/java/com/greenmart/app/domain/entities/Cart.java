@@ -32,8 +32,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Cart {
-
-//CartID, UserID, CreatedAt, UpdatedAt 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;

@@ -21,6 +21,8 @@ public interface ProductService {
 	List<Product> getProductsByCategory(UUID categoryId);
 
 	List<Product> getProductsByVendor(UUID vendorId);
+
+	List<Product> getPendingProducts();
 	
 	
 }

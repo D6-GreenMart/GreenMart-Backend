@@ -1,12 +1,8 @@
 package com.greenmart.app.domain.dtos;
 
-import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 import com.greenmart.app.domain.ProductStatus;
-import com.greenmart.app.domain.entities.Category;
-import com.greenmart.app.domain.entities.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,4 +23,5 @@ public class ProductDto {
 	private String imagePath;
 	private UUID vendorId;
 	private UUID categoryId;
+	private ProductStatus status;
 }
