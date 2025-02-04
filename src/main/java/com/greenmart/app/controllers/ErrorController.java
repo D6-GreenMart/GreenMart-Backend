@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.greenmart.app.domain.dtos.ApiErrorResponse;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -51,5 +52,14 @@ public class ErrorController {
 	            .message("Incorrect username or password")
 	            .build();
 	    return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+	}
+	
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<ApiErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex) {
+	    ApiErrorResponse error = ApiErrorResponse.builder()
+	            .status(HttpStatus.NOT_FOUND.value())
+	            .message(ex.getMessage())
+	            .build();
+	    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 }

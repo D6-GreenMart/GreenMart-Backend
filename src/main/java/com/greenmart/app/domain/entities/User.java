@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.greenmart.app.domain.UserRole;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,6 +57,9 @@ public class User {
 	private LocalDateTime createdAt;
 
 	private String imagePath;
+	
+	@Column(nullable = false)
+	private UserRole role;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Order> orders = new ArrayList<>();
@@ -63,6 +69,9 @@ public class User {
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
+	
+	@OneToMany(mappedBy = "vendor")
+    private List<Product> products;
 
 	@PrePersist
 	protected void onCreate() {
