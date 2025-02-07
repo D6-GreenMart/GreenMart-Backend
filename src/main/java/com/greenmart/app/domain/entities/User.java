@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenmart.app.domain.UserRole;
 
 import jakarta.persistence.CascadeType;

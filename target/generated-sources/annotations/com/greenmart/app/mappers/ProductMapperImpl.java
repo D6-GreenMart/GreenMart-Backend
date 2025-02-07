@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-08T00:45:44+0530",
-    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.41.0.z20250115-2156, environment: Java 21.0.5 (Eclipse Adoptium)"
+    date = "2025-02-08T03:05:26+0530",
+    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.40.0.v20241112-0530, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -55,7 +55,6 @@ public class ProductMapperImpl implements ProductMapper {
         createProductRequest.name( dto.getName() );
         createProductRequest.price( dto.getPrice() );
         createProductRequest.quantity( dto.getQuantity() );
-        createProductRequest.vendorId( dto.getVendorId() );
 
         return createProductRequest.build();
     }

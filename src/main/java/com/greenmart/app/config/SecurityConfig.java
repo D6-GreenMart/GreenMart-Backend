@@ -56,6 +56,10 @@ public class SecurityConfig {
 		http
         .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/users/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/users/{userId}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/users/me").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/users/update").authenticated()
 //                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
 //                .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
 //                .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").permitAll()
@@ -79,7 +83,8 @@ public class SecurityConfig {
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/orders/**").permitAll()
                 
              // Example: restrict endpoints under "/api/v1/admin" to ADMIN role only
-                .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()//.hasRole("ADMIN")
+                .requestMatchers("/api/v1/users/me").authenticated()
                 // You can similarly restrict vendor or customer endpoints:
                 .requestMatchers("/api/v1/vendor/**").hasRole("VENDOR")
                 .requestMatchers("/api/v1/customer/**").hasRole("CUSTOMER")

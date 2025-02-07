@@ -7,7 +7,7 @@ import com.greenmart.app.domain.dtos.CreateOrderRequestDto;
 import com.greenmart.app.domain.dtos.OrderDto;
 
 public interface OrderService {
-    OrderDto createOrder(CreateOrderRequestDto requestDto);
+    OrderDto createOrder(UUID userId, CreateOrderRequestDto requestDto);
     List<OrderDto> getOrdersByUserId(UUID userId);
     OrderDto getOrderById(UUID orderId);
     void cancelOrder(UUID orderId);

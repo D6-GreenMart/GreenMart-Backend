@@ -24,9 +24,6 @@ public class CreateProductRequestDto {
 
 	@NotNull(message = "Category is required")
 	private UUID categoryId;
-	
-	@NotNull(message = "Vendor is required")
-	private UUID vendorId;
 
 	private String description;
 

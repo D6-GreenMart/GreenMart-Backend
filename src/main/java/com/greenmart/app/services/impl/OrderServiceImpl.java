@@ -39,11 +39,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto createOrder(CreateOrderRequestDto requestDto) {
-        User user = userRepository.findById(requestDto.getUserId())
+    public OrderDto createOrder(UUID userId, CreateOrderRequestDto requestDto) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        Cart cart = cartRepository.findByUserId(requestDto.getUserId())
+        Cart cart = cartRepository.findByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Cart not found"));
 
         if (cart.getCartItems().isEmpty()) {

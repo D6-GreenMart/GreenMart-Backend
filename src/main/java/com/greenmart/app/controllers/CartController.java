@@ -1,14 +1,28 @@
 package com.greenmart.app.controllers;
 
+import java.util.UUID;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.greenmart.app.domain.dtos.CartDto;
 import com.greenmart.app.domain.dtos.UpdateCartItemRequestDto;
+import com.greenmart.app.domain.entities.User;
 import com.greenmart.app.services.CartService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.greenmart.app.services.UserService;
 
 import jakarta.validation.Valid;
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/cart")
@@ -16,31 +30,37 @@ import java.util.UUID;
 public class CartController {
 
     private final CartService cartService;
+    private final UserService userService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<CartDto> getCart(@PathVariable UUID userId) {
-        return ResponseEntity.ok(cartService.getCart(userId));
+    @GetMapping
+    public ResponseEntity<CartDto> getCart(@AuthenticationPrincipal UserDetails userDetails) {
+    	User user = userService.getUserByEmail(userDetails.getUsername());
+        return ResponseEntity.ok(cartService.getCart(user.getId()));
     }
 
-    @PostMapping("/{userId}/add/{productId}")
-    public ResponseEntity<CartDto> addItemToCart(@PathVariable UUID userId, @PathVariable UUID productId, @RequestParam int quantity) {
-        return ResponseEntity.ok(cartService.addItemToCart(userId, productId, quantity));
+    @PostMapping("/add/{productId}")
+    public ResponseEntity<CartDto> addItemToCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID productId, @RequestParam int quantity) {
+    	User user = userService.getUserByEmail(userDetails.getUsername());
+    	return ResponseEntity.ok(cartService.addItemToCart(user.getId(), productId, quantity));
     }
 
-    @PutMapping("/{userId}/update/{cartItemId}")
-    public ResponseEntity<CartDto> updateCartItem(@PathVariable UUID userId, @PathVariable UUID cartItemId, @Valid @RequestBody UpdateCartItemRequestDto updateRequest) {
-        return ResponseEntity.ok(cartService.updateCartItem(userId, cartItemId, updateRequest));
+    @PutMapping("/update/{cartItemId}")
+    public ResponseEntity<CartDto> updateCartItem(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID cartItemId, @Valid @RequestBody UpdateCartItemRequestDto updateRequest) {
+    	User user = userService.getUserByEmail(userDetails.getUsername());
+    	return ResponseEntity.ok(cartService.updateCartItem(user.getId(), cartItemId, updateRequest));
     }
 
-    @DeleteMapping("/{userId}/remove/{cartItemId}")
-    public ResponseEntity<Void> removeItem(@PathVariable UUID userId, @PathVariable UUID cartItemId) {
-        cartService.removeItemFromCart(userId, cartItemId);
+    @DeleteMapping("/remove/{cartItemId}")
+    public ResponseEntity<Void> removeItem(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID cartItemId) {
+    	User user = userService.getUserByEmail(userDetails.getUsername());
+    	cartService.removeItemFromCart(user.getId(), cartItemId);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{userId}/clear")
-    public ResponseEntity<Void> clearCart(@PathVariable UUID userId) {
-        cartService.clearCart(userId);
+    @DeleteMapping("/clear")
+    public ResponseEntity<Void> clearCart(@AuthenticationPrincipal UserDetails userDetails) {
+    	User user = userService.getUserByEmail(userDetails.getUsername());
+    	cartService.clearCart(user.getId());
         return ResponseEntity.noContent().build();
     }
 }
