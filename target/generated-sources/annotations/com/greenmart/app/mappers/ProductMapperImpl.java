@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-07T19:18:46+0530",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
+    date = "2025-02-08T00:45:44+0530",
+    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.41.0.z20250115-2156, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -28,14 +28,14 @@ public class ProductMapperImpl implements ProductMapper {
 
         productDto.vendorId( productVendorId( product ) );
         productDto.categoryId( productCategoryId( product ) );
-        productDto.id( product.getId() );
-        productDto.name( product.getName() );
         productDto.description( product.getDescription() );
+        productDto.id( product.getId() );
+        productDto.imagePath( product.getImagePath() );
+        productDto.name( product.getName() );
         productDto.price( product.getPrice() );
         if ( product.getQuantity() != null ) {
             productDto.quantity( product.getQuantity().intValue() );
         }
-        productDto.imagePath( product.getImagePath() );
         productDto.status( product.getStatus() );
 
         return productDto.build();
@@ -49,13 +49,13 @@ public class ProductMapperImpl implements ProductMapper {
 
         CreateProductRequest.CreateProductRequestBuilder createProductRequest = CreateProductRequest.builder();
 
-        createProductRequest.name( dto.getName() );
+        createProductRequest.categoryId( dto.getCategoryId() );
         createProductRequest.description( dto.getDescription() );
+        createProductRequest.imagePath( dto.getImagePath() );
+        createProductRequest.name( dto.getName() );
         createProductRequest.price( dto.getPrice() );
         createProductRequest.quantity( dto.getQuantity() );
-        createProductRequest.imagePath( dto.getImagePath() );
         createProductRequest.vendorId( dto.getVendorId() );
-        createProductRequest.categoryId( dto.getCategoryId() );
 
         return createProductRequest.build();
     }
