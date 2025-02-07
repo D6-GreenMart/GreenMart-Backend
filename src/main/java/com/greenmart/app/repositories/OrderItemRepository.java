@@ -9,5 +9,5 @@ import com.greenmart.app.domain.entities.OrderItem;
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, UUID> {
- 
 }
+

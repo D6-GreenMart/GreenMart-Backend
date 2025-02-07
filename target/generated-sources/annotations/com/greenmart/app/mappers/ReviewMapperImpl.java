@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-04T14:17:21+0530",
-    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.40.0.v20241112-0530, environment: Java 21.0.5 (Eclipse Adoptium)"
+    date = "2025-02-07T19:18:47+0530",
+    comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Eclipse Adoptium)"
 )
 @Component
 public class ReviewMapperImpl implements ReviewMapper {
@@ -26,10 +26,10 @@ public class ReviewMapperImpl implements ReviewMapper {
 
         reviewDto.userId( reviewUserId( review ) );
         reviewDto.productId( reviewProductId( review ) );
-        reviewDto.comment( review.getComment() );
-        reviewDto.createdAt( review.getCreatedAt() );
         reviewDto.id( review.getId() );
         reviewDto.rating( review.getRating() );
+        reviewDto.comment( review.getComment() );
+        reviewDto.createdAt( review.getCreatedAt() );
 
         return reviewDto.build();
     }
