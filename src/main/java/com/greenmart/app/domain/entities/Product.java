@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenmart.app.domain.ProductStatus;
 
 import jakarta.persistence.CascadeType;
@@ -48,13 +49,13 @@ public class Product {
 	@Column(nullable = false)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vendor_id", nullable = false)
-	private Vendor vendor;
+	@ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", nullable = false)
-	private Category category;
+    @ManyToOne
+    @JoinColumn(name = "vendor_id", nullable = false)
+    private User vendor;
 
 	@Column(nullable = false, columnDefinition = "TEXT")
 	private String description;
@@ -72,13 +73,6 @@ public class Product {
 	@Enumerated(EnumType.STRING)
 	private ProductStatus status;
 
-	@ManyToMany
-	@JoinTable(
-		name = "product_tags", 
-		joinColumns = @JoinColumn(name = "product_id"), 
-		inverseJoinColumns = @JoinColumn(name = "tag_id")
-	)
-	private Set<Tag> tags = new HashSet<>();
 	
 //	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<OrderItem> orderItems = new HashSet<>();

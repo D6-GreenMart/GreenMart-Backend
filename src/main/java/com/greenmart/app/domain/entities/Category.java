@@ -40,7 +40,7 @@ public class Category {
 	private String imagePath;
 
 	@OneToMany(mappedBy = "category")
-	private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
 	@Override
 	public int hashCode() {
