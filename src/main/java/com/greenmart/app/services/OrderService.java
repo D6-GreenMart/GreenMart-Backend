@@ -12,4 +12,5 @@ public interface OrderService {
     OrderDto getOrderById(UUID orderId);
     void cancelOrder(UUID orderId);
 	OrderDto markOrderAsDelivered(UUID orderId);
+	List<OrderDto> getAllPendingOrders();
 }

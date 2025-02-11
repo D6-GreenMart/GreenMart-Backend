@@ -1,5 +1,7 @@
 package com.greenmart.app.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,12 +14,15 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.greenmart.app.domain.entities.User;
 import com.greenmart.app.repositories.UserRepository;
 import com.greenmart.app.security.AppUserDetailsService;
 import com.greenmart.app.security.JwtAuthenticationFilter;
 import com.greenmart.app.services.AuthenticationService;
+
 
 @Configuration
 public class SecurityConfig {
@@ -55,29 +60,33 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
 		http
         .authorizeHttpRequests(auth -> auth
+        		.requestMatchers(HttpMethod.GET, "/api/v1/products/search").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/users/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/{userId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/me").authenticated()
+                .requestMatchers(HttpMethod.GET, "/api/v1/users").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/v1/users/update").authenticated()
 //                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
-//                .requestMatchers(HttpMethod.POST, "/api/v1/products/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/categories").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/products/category/{categoryId}").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/products").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/products/{productId}/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/products/{productId}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()
 //                .requestMatchers(HttpMethod.POST, "/api/v1/reviews/**").permitAll()
 //                .requestMatchers(HttpMethod.DELETE, "/api/v1/tags/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/users/add/{productId}").permitAll()
 //                .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
 //                .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").permitAll()
 //                .requestMatchers(HttpMethod.POST, "/api/v1/cart/**").permitAll()
 //                .requestMatchers(HttpMethod.GET, "/api/v1/cart/**").permitAll()
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/cart/**").permitAll()
 //                .requestMatchers(HttpMethod.DELETE, "/api/v1/cart/**").permitAll()
-//                .requestMatchers(HttpMethod.GET, "/api/v1/orders/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/orders/**").permitAll()	
 //                .requestMatchers(HttpMethod.POST, "/api/v1/orders/**").permitAll()
 //                .requestMatchers(HttpMethod.DELETE, "/api/v1/orders/**").permitAll()
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/orders/**").permitAll()
@@ -91,6 +100,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         )
         .csrf(csrf -> csrf.disable())
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -98,6 +108,22 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+	
+	@Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        // Use Arrays.asList to create a List<String>
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;  // UrlBasedCorsConfigurationSource implements CorsConfigurationSource
+    }
+	
+	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {

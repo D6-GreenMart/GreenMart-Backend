@@ -76,6 +76,12 @@ public class ProductController {
 	    return ResponseEntity.ok(updatedProductDto);
 	}
 	
+	@GetMapping("/{productId}")
+	public ResponseEntity<ProductDto> getProductsById(@PathVariable UUID productId) {
+	    Product product = productService.getProductById(productId);
+	    return ResponseEntity.ok(productMapper.toDto(product));
+	}
+	
 	@GetMapping("/category/{categoryId}")
 	public ResponseEntity<List<ProductDto>> getProductsByCategory(@PathVariable UUID categoryId) {
 	    List<Product> products = productService.getProductsByCategory(categoryId);
@@ -98,6 +104,17 @@ public class ProductController {
 	    return ResponseEntity.ok(productDtos);
 	}
 	
+	@GetMapping("/vendor/{vendorId}/pending")
+	public ResponseEntity<List<ProductDto>> getPendingProductsByVendor(@PathVariable UUID vendorId) {
+	    List<Product> products = productService.getPendingProductsByVendor(vendorId);
+	    
+	    List<ProductDto> productDtos = products.stream()
+	            .map(productMapper::toDto)
+	            .collect(Collectors.toList());
+	    
+	    return ResponseEntity.ok(productDtos);
+	}
+	
 	@GetMapping("/pending")
     public ResponseEntity<List<ProductDto>> getPendingProducts() {
         List<Product> pendingProducts = productService.getPendingProducts();
@@ -109,7 +126,27 @@ public class ProductController {
         return ResponseEntity.ok(productDtos);
     }
 	
+	@GetMapping("/search")
+	public ResponseEntity<List<ProductDto>> searchProducts(@RequestParam String keyword) {
+	    List<Product> products = productService.searchProducts(keyword);
+	    
+	    List<ProductDto> productDtos = products.stream()
+	            .map(productMapper::toDto)
+	            .collect(Collectors.toList());
+	    
+	    return ResponseEntity.ok(productDtos);
+	}
 	
+	@GetMapping
+	public ResponseEntity<List<ProductDto>> getAllProducts() {
+	    List<Product> products = productService.getAllProducts();
+	    
+	    List<ProductDto> productDtos = products.stream()
+	            .map(productMapper::toDto)
+	            .collect(Collectors.toList());
+	    
+	    return ResponseEntity.ok(productDtos);
+	}
 	
 
 

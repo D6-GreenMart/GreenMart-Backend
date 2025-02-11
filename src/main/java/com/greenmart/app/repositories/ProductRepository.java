@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.greenmart.app.domain.ProductStatus;
@@ -38,4 +39,10 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 	List<Product> findByVendorAndStatus(User vendor, ProductStatus approved);
 	
 	List<Product> findByStatus(ProductStatus status);
+	
+	@Query("SELECT p FROM Product p WHERE (LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+	           "OR LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+	           "AND p.status = 'APPROVED'")
+	    List<Product> searchProductsByKeyword(String keyword);
+
 }

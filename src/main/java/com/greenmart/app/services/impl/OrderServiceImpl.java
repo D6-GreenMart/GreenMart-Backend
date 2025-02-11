@@ -14,12 +14,14 @@ import com.greenmart.app.domain.entities.Cart;
 import com.greenmart.app.domain.entities.CartItem;
 import com.greenmart.app.domain.entities.Order;
 import com.greenmart.app.domain.entities.OrderItem;
+import com.greenmart.app.domain.entities.Product;
 import com.greenmart.app.domain.entities.User;
 import com.greenmart.app.mappers.OrderMapper;
 import com.greenmart.app.repositories.CartItemRepository;
 import com.greenmart.app.repositories.CartRepository;
 import com.greenmart.app.repositories.OrderItemRepository;
 import com.greenmart.app.repositories.OrderRepository;
+import com.greenmart.app.repositories.ProductRepository;
 import com.greenmart.app.repositories.UserRepository;
 import com.greenmart.app.services.OrderService;
 
@@ -36,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
     private final CartItemRepository cartItemRepository;
     private final UserRepository userRepository;
     private final OrderMapper orderMapper;
+    private final ProductRepository productRepository;
 
     @Override
     @Transactional
@@ -61,11 +64,20 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         for (CartItem cartItem : cart.getCartItems()) {
+            Product product = cartItem.getProduct();
+            if (product.getQuantity() < cartItem.getQuantity()) {
+                throw new IllegalStateException("Insufficient stock for product: " + product.getName());
+            }
+
+            // Decrease product stock
+            product.setQuantity(product.getQuantity() - cartItem.getQuantity());
+            productRepository.save(product);
+
             OrderItem orderItem = OrderItem.builder()
                     .order(order)
-                    .product(cartItem.getProduct())
+                    .product(product)
                     .quantity(cartItem.getQuantity())
-                    .price(cartItem.getProduct().getPrice())
+                    .price(product.getPrice())
                     .build();
             order.getOrderItems().add(orderItem);
         }
@@ -76,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
         return orderMapper.toDto(order);
     }
+
 
     @Override
     public List<OrderDto> getOrdersByUserId(UUID userId) {
@@ -117,5 +130,12 @@ public class OrderServiceImpl implements OrderService {
         
         return orderMapper.toDto(order);
     }
+    
+    @Override
+    public List<OrderDto> getAllPendingOrders() {
+        List<Order> pendingOrders = orderRepository.findByStatus(OrderStatus.PENDING);
+        return orderMapper.toDtoList(pendingOrders);
+    }
+
 
 }

@@ -58,6 +58,11 @@ public class OrderController {
     public ResponseEntity<OrderDto> markOrderAsDelivered(@PathVariable UUID orderId) {
         return ResponseEntity.ok(orderService.markOrderAsDelivered(orderId));
     }
+    
+    @GetMapping("/pending")
+    public ResponseEntity<List<OrderDto>> getAllPendingOrders() {
+        return ResponseEntity.ok(orderService.getAllPendingOrders());
+    }
 
 }
 
