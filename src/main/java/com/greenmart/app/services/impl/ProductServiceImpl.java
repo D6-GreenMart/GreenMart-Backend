@@ -91,12 +91,27 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> getPendingProductsByVendor(UUID vendorId) {
+	    User vendor = userRepository.findById(vendorId)
+	            .orElseThrow(() -> new EntityNotFoundException("Vendor not found"));
+	    return productRepository.findByVendorAndStatus(vendor, ProductStatus.PENDING);
+	}
+	
+	@Override
 	public List<Product> getPendingProducts() {
 	    return productRepository.findAllByStatus(ProductStatus.PENDING);
 	}
 
+	@Override
+	public List<Product> searchProducts(String keyword) {
+	    return productRepository.searchProductsByKeyword(keyword);
+	}
 
-    
+	@Override
+	public List<Product> getAllProducts() {
+	    return productRepository.findAllByStatus(ProductStatus.APPROVED);
+	}
+
     
 
 

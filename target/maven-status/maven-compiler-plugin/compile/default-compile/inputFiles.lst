@@ -24,6 +24,7 @@ S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\Order
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\ProductDto.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\ReviewDto.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\UpdateCartItemRequestDto.java
+S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\dtos\UserDto.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Cart.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\CartItem.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\domain\entities\Category.java
@@ -41,6 +42,7 @@ S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\CategoryM
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\OrderMapper.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\ProductMapper.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\ReviewMapper.java
+S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\mappers\UserMapper.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CartItemRepository.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CartRepository.java
 S:\Greenmart\GreenMart-Backend\src\main\java\com\greenmart\app\repositories\CategoryRepository.java

@@ -23,6 +23,12 @@ public interface ProductService {
 	List<Product> getProductsByVendor(UUID vendorId);
 
 	List<Product> getPendingProducts();
+
+	List<Product> getPendingProductsByVendor(UUID vendorId);
+
+	List<Product> searchProducts(String keyword);
+
+	List<Product> getAllProducts();
 	
 	
 }
